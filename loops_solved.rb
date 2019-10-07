@@ -193,15 +193,47 @@ puts "is there either 2 or 4 next to each other: #{either_2_4([1,2,3,4,4,6])}"
 
 def max_span(list)
     max = 0
-    num= 1
-    list.each do |i| 
-        if list[i] != list[i+num]
-            num +=1
+    
+    list.size.times do |i|
+        x = i + 1
+        i = 0
+        if list[i] != list[x]
+            x= x+1
+        else 
+            if x > max
+                max = x
+            end
         end
-        if num > max
-            max += num
-        end
+        i += 1
     end
     return max
 end
-puts "the largest diffrence is #{max_span([1,2,4,3,100,3,1,5])}" 
+puts "the largest diffrence is #{max_span([1,2,4,3,22,1,5])}" 
+
+def g_happy(string)
+    happy = 0
+    sad = 0
+    string.size.times do |i|
+        if string[i] == "g"
+            if string[i+1] == "g" || string[i-1] == "g"
+                happy += 1
+            else 
+                sad +=1
+            end
+        end
+    end
+    if happy>0 && sad==0
+        return true
+    else
+        return false
+    end
+end
+puts "are the gs happy #{g_happy("goeeggow")}" #false
+puts "are the gs happy #{g_happy("ggoggoggo")}" #true
+
+def merge(l1,l2)
+    nlist = []
+    nlist.push[l1].push(l2)
+    puts nlist
+end
+puts "the new list is #{merge([1,3,6],[2,4,5])}" #1,2,3,4,5,6
